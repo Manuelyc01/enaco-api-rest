@@ -1,0 +1,18 @@
+package apirest.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Reporte {
+    private UnidadOperativa codUni;
+    private TipoHojaCoca codHc;
+    private String fcInicio;
+    private String fcFin;
+    private Integer codRep;
+    private Integer periodo;
+    private Integer transaccion;
+}
