@@ -1,4 +1,4 @@
-package apirest.reporsitory;
+package apirest.repository;
 
 import apirest.models.Decomiso;
 import org.springframework.data.domain.Pageable;

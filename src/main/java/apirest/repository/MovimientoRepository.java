@@ -1,4 +1,4 @@
-package apirest.reporsitory;
+package apirest.repository;
 
 import apirest.models.Movimiento;
 import org.springframework.data.jpa.repository.JpaRepository;

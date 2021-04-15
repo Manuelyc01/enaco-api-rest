@@ -1,4 +1,4 @@
-package apirest.reporsitory;
+package apirest.repository;
 
 import apirest.models.Estado;
 import org.springframework.data.jpa.repository.JpaRepository;

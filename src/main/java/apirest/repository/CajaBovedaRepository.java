@@ -1,4 +1,4 @@
-package apirest.reporsitory;
+package apirest.repository;
 
 import apirest.models.CajaBoveda;
 import org.springframework.data.domain.Pageable;

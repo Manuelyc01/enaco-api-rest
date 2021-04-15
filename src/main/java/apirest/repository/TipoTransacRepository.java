@@ -1,4 +1,4 @@
-package apirest.reporsitory;
+package apirest.repository;
 
 import apirest.models.TipoTransaccion;
 import org.springframework.data.jpa.repository.JpaRepository;
