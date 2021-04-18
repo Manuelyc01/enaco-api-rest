@@ -11,11 +11,8 @@ import java.util.List;
 public class RestUsuario {
     private final UsuarioService usuarioService;
 
-    private final UsuarioRepository repository;
-
-    public RestUsuario(UsuarioService usuarioService, UsuarioRepository repository) {
+  public RestUsuario(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
-        this.repository = repository;
     }
 
     @GetMapping("/listar")
