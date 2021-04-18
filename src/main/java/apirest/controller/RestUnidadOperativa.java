@@ -25,23 +25,15 @@ public class RestUnidadOperativa {
     public UnidadOperativa listByUni(@PathVariable String cod){
         return unidadOpeService.findByCod(cod);
     }
-    @RequestMapping(method = RequestMethod.POST, value = "/registro")
-    public void save(@RequestBody UnidadOperativa unidadOperativa){
-        unidadOpeService.save(unidadOperativa);
-    }
-    @GetMapping("/saveCajaBoveda/{cod}/{monto}/{tipo}")
-    public void saveCajaBoveda(@PathVariable String cod, @PathVariable Double monto, @PathVariable Integer tipo){
-        unidadOpeService.saveCajaBoveda(cod,monto,tipo);
-    }
     @GetMapping("/listarAgeSu/{cod_agencia}/{cod_sucursal}")
     public List<UnidadOperativa> listarAgeSu(@PathVariable String cod_agencia, @PathVariable String cod_sucursal){
         return unidadOpeService.listarAgeSu(cod_agencia,cod_sucursal);
     }
-    @GetMapping("/listarAgeSu/{cod_agencia}")
+    @GetMapping("/listarAge/{cod_agencia}")
     public List<UnidadOperativa> listarAgencia(@PathVariable String cod_agencia){
         return unidadOpeService.listarAgencia(cod_agencia);
     }
-    @GetMapping("/listarAgeSu/{cod_sucursal}")
+    @GetMapping("/listarSu/{cod_sucursal}")
     public List<UnidadOperativa> listarSucursal( @PathVariable String cod_sucursal){
         return unidadOpeService.listarSucursal(cod_sucursal);
     }
