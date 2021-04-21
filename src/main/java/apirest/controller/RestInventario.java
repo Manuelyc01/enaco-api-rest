@@ -47,7 +47,7 @@ public class RestInventario {
     public List<Inventario> listByProductAlmacenOne(@PathVariable String ch,@PathVariable String cu){
         return inventarioService.listByProductAlmacenOne(ch,cu);
     }
-    @GetMapping("/stockHcAlmacen/{ch}/{cu}")
+        @GetMapping("/stockHcAlmacen/{ch}/{cu}")
     public List<Inventario> stockHcAlmacen(@PathVariable String ch,@PathVariable String cu){
         return inventarioService.stockHcAlmacen(ch,cu);
     }
