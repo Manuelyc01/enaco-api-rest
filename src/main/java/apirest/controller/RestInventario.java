@@ -52,7 +52,7 @@ public class RestInventario {
         return inventarioService.stockHcAlmacen(ch,cu);
     }
     @GetMapping("/actaHojas/{per}/{cod}")
-    public List<TipoHojaCoca> listByUni(@PathVariable String cod, @PathVariable Integer per) throws ParseException {
+    public List<TipoHojaCoca> actaHojas(@PathVariable String cod, @PathVariable Integer per) throws ParseException {
         return inventarioService.actaHojas(per,cod);
     }
     @GetMapping("/actaSaldo/{per}/{cod}/{codHc}")
