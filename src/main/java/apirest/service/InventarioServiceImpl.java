@@ -87,8 +87,18 @@ public class InventarioServiceImpl implements InventarioService{
     public Double actaSaldo(Integer periodo, String cod, String codHc) throws ParseException {
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-        Date ini =format.parse(format.format(globalInicio(periodo)));
-        Date fn =format.parse(format.format(globalFin(periodo)));
+        Date año=new Date();
+        int year = año.getYear();
+        Date globalinicio=new Date(year,periodo,01);
+        Date globalfin;
+        if (periodo==11){
+            globalfin=new Date(year,0,01);
+        }else {
+            globalfin=new Date(year,periodo+1,01);
+        }
+
+        Date ini =format.parse(format.format(globalinicio));
+        Date fn =format.parse(format.format(globalfin));
         List<Inventario> in = inventarioRepository.actaSaldo(ini, fn, cod, codHc, PageRequest.of(0, 1));
         if (in.size()==0){
             return 0.00;
@@ -102,8 +112,18 @@ public class InventarioServiceImpl implements InventarioService{
         for (int i=1;i<5;i++){
             SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-            Date ini =format.parse(format.format(globalInicio(periodo)));
-            Date fn =format.parse(format.format(globalFin(periodo)));
+            Date año=new Date();
+            int year = año.getYear();
+            Date globalinicio=new Date(year,periodo,01);
+            Date globalfin;
+            if (periodo==11){
+                globalfin=new Date(year,0,01);
+            }else {
+                globalfin=new Date(year,periodo+1,01);
+            }
+
+            Date ini =format.parse(format.format(globalinicio));
+            Date fn =format.parse(format.format(globalfin));
             List<Double> d = inventarioRepository.actaIngreso(ini, fn, cod, codHc,i, PageRequest.of(0, 1));
             Ingreso ingreso=new Ingreso();
             ingreso.setId(i);
@@ -121,8 +141,18 @@ public class InventarioServiceImpl implements InventarioService{
         List<IngresoSalida> ingresos=new ArrayList<>();
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-        Date ini =format.parse(format.format(globalInicio(periodo)));
-        Date fn =format.parse(format.format(globalFin(periodo)));
+        Date año=new Date();
+        int year = año.getYear();
+        Date globalinicio=new Date(year,periodo,01);
+        Date globalfin;
+        if (periodo==11){
+            globalfin=new Date(year,0,01);
+        }else {
+            globalfin=new Date(year,periodo+1,01);
+        }
+
+        Date ini =format.parse(format.format(globalinicio));
+        Date fn =format.parse(format.format(globalfin));
 
         List<Double> i = inventarioRepository.actaIngresoTransferencia(ini, fn, cod, codHc, PageRequest.of(0, 1));
         List<Double> s = inventarioRepository.actaSalidaTransferencia(ini, fn, cod, codHc, PageRequest.of(0, 1));
@@ -144,24 +174,5 @@ public class InventarioServiceImpl implements InventarioService{
         ingresos.add(ingreso);
         ingresos.add(ingreso2);
         return ingresos;
-    }
-    //inicio de mes
-    public String globalInicio(Integer periodo){
-        Date año=new Date();
-        int year = año.getYear();
-        Date globalinicio=new Date(year,periodo,01);
-        return globalinicio.toString();
-    }
-    //fin de mes
-    public String globalFin(Integer periodo){
-        Date año=new Date();
-        int year = año.getYear();
-        Date globalfin;
-        if (periodo==11){
-            globalfin=new Date(year,0,01);
-        }else {
-            globalfin=new Date(year,periodo+1,01);
-        }
-        return globalfin.toString();
     }
 }
