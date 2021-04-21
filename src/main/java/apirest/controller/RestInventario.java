@@ -1,8 +1,6 @@
 package apirest.controller;
 
-import apirest.models.ActaRegistro;
-import apirest.models.CajaBoveda;
-import apirest.models.Inventario;
+import apirest.models.*;
 import apirest.service.InventarioService;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +18,6 @@ public class RestInventario {
         this.inventarioService = inventarioService;
     }
 
-    @GetMapping("/reporteActaRegistro/{cod}/{per}/{nombreUsuario}")
-    public List<ActaRegistro> reporteActaRegistro(@PathVariable String cod, @PathVariable Integer per, @PathVariable String nombreUsuario) throws ParseException {
-        return inventarioService.reporteActaRegistro(cod, per, nombreUsuario);
-    }
     @RequestMapping(method = RequestMethod.POST, value = "/registro")
     public void save(@RequestBody Inventario inventario){
         inventarioService.save(inventario);
@@ -55,8 +49,29 @@ public class RestInventario {
     }
     @GetMapping("/stockHcAlmacen/{ch}/{cu}")
     public List<Inventario> stockHcAlmacen(@PathVariable String ch,@PathVariable String cu){
-        return inventarioService.listByProductAlmacen(ch,cu);
+        return inventarioService.stockHcAlmacen(ch,cu);
     }
+    @GetMapping("/actaHojas/{per}/{cod}")
+    public List<TipoHojaCoca> listByUni(@PathVariable String cod, @PathVariable Integer per) throws ParseException {
+        return inventarioService.actaHojas(per,cod);
+    }
+    @GetMapping("/actaSaldo/{per}/{cod}/{codHc}")
+    public Double actaSaldo(@PathVariable String cod, @PathVariable Integer per, @PathVariable String codHc) throws ParseException {
+        return inventarioService.actaSaldo(per,cod,codHc);
+    }
+    @GetMapping("/actaIngreso/{per}/{cod}/{codHc}")
+    public List<Ingreso> actaIngreso(@PathVariable String cod, @PathVariable Integer per, @PathVariable String codHc) throws ParseException {
+        return inventarioService.actaIngreso(per,cod,codHc);
+    }
+    @GetMapping("/actaIngresoSalida/{per}/{cod}/{codHc}")
+    public List<IngresoSalida> actaIngresoSalida(@PathVariable String cod, @PathVariable Integer per, @PathVariable String codHc) throws ParseException {
+        return inventarioService.actaIngresoSalida(per,cod,codHc);
+    }
+
+
+
+
+
 
 
 
