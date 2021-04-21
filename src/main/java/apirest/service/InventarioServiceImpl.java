@@ -68,8 +68,18 @@ public class InventarioServiceImpl implements InventarioService{
     public List<TipoHojaCoca> actaHojas(Integer periodo, String cod) throws ParseException {
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-        Date ini =format.parse(format.format(globalInicio(periodo)));
-        Date fn =format.parse(format.format(globalFin(periodo)));
+        Date año=new Date();
+        int year = año.getYear();
+        Date globalinicio=new Date(year,periodo,01);
+        Date globalfin;
+        if (periodo==11){
+            globalfin=new Date(year,0,01);
+        }else {
+            globalfin=new Date(year,periodo+1,01);
+        }
+
+        Date ini =format.parse(format.format(globalinicio));
+        Date fn =format.parse(format.format(globalfin));
 
         return inventarioRepository.actaHojas(ini,fn,cod);
     }
