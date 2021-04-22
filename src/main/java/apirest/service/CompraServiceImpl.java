@@ -35,6 +35,7 @@ public class CompraServiceImpl implements CompraService{
     }
 
     @Override
+    @Transactional
     public void save(Compra compra){
         //REGISTRO CAJA BOVEDA
         CajaBoveda cajaBoveda=new CajaBoveda();
@@ -72,6 +73,7 @@ public class CompraServiceImpl implements CompraService{
             inventario.setStockFinal(inventario1.getStockFinal()+compra.getPesoNeto());
         }
         cajaBovedaService.save(cajaBoveda);
+        unidadOpeService.saveCajaBoveda(uo.getCod_uniOpe(),monto,id_tipo);
         usuarioService.compra(compra.getId_usuario().getId_usuario());
         inventarioService.save(inventario);
         compraRepository.save(compra);

@@ -30,6 +30,7 @@ public class CajaBovedaServiceImpl implements CajaBovedaService{
     }
 
     @Override
+    @Transactional
     public void save(CajaBoveda cajaBoveda){
 
         UnidadOperativa uo = unidadOpeService.findByCod(cajaBoveda.getCod_uniOpe().getCod_uniOpe());//UNIDAD
