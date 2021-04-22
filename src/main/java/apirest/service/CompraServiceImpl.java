@@ -71,9 +71,9 @@ public class CompraServiceImpl implements CompraService{
             inventario.setStockInicial(inventario1.getStockFinal());
             inventario.setStockFinal(inventario1.getStockFinal()+compra.getPesoNeto());
         }
+        cajaBovedaService.save(cajaBoveda);
         usuarioService.compra(compra.getId_usuario().getId_usuario());
         inventarioService.save(inventario);
-        cajaBovedaService.save(cajaBoveda);
         compraRepository.save(compra);
     }
     @Override
