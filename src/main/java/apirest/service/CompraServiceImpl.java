@@ -44,7 +44,13 @@ public class CompraServiceImpl implements CompraService{
         cajaBoveda.setId_tipoTransac(tipoT);
         cajaBoveda.setFecha(compra.getFecha());
         cajaBoveda.setMonto(compra.getTotalCompra());
-
+        //EX
+        UnidadOperativa uo = unidadOpeService.findByCod(cajaBoveda.getCod_uniOpe().getCod_uniOpe());//UNIDAD
+        Integer id_tipo = cajaBoveda.getId_tipoTransac().getId_tipoTransac();//Tipo transac
+        Double monto = cajaBoveda.getMonto();
+        if(id_tipo==2 ||id_tipo==3 && uo.getCajaBoveda()<monto){
+            throw new RuntimeException("Sin saldo caja boveda");
+        }
         //REGISTRO INVENTARIO
         Inventario inventario=new Inventario();
         inventario.setId_usuario(compra.getId_usuario());
@@ -66,10 +72,9 @@ public class CompraServiceImpl implements CompraService{
             inventario.setStockFinal(inventario1.getStockFinal()+compra.getPesoNeto());
         }
         usuarioService.compra(compra.getId_usuario().getId_usuario());
-        unidadOpeService.saveCajaBoveda(compra.getCod_uniOpe().getCod_uniOpe(), compra.getTotalCompra(), 2);
-        compraRepository.save(compra);
         inventarioService.save(inventario);
         cajaBovedaService.save(cajaBoveda);
+        compraRepository.save(compra);
     }
     @Override
     public List<Compra> list(){
