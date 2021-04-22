@@ -1,11 +1,13 @@
 package apirest.service;
 
 import apirest.models.Compra;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.util.List;
 
 public interface CompraService {
+    @Transactional
     void save(Compra compra);
 
     List<Compra> list();

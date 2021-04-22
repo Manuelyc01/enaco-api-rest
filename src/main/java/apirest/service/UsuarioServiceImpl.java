@@ -64,6 +64,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     }
     @Override
+    @Transactional
     public void compra(Integer id){
         Usuario u= repository.getOne(id);
         if (u.getNum_compras()!=null){

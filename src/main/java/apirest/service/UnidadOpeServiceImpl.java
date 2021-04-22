@@ -30,6 +30,7 @@ public class UnidadOpeServiceImpl implements UnidadOpeService{
         unidadOperativaRepository.save(unidadOperativa);
     }
     @Override
+    @Transactional
     public void saveCajaBoveda(String cod, double monto, Integer tipo){
         UnidadOperativa u = unidadOperativaRepository.getOne(cod);
         Double m=Math.round(monto * 100.0) / 100.0;

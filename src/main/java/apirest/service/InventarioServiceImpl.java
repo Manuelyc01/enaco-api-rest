@@ -22,7 +22,9 @@ public class InventarioServiceImpl implements InventarioService{
     public InventarioServiceImpl(InventarioRepository inventarioRepository, UnidadOpeService unidadOpeService) {
         this.inventarioRepository = inventarioRepository;
         this.unidadOpeService = unidadOpeService;
-    } @Override
+    }
+    @Override
+    @Transactional
     public void save(Inventario inventario){
         inventarioRepository.save(inventario);
     }

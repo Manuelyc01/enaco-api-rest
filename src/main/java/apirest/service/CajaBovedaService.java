@@ -1,6 +1,7 @@
 package apirest.service;
 
 import apirest.models.CajaBoveda;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public interface CajaBovedaService {
     List<CajaBoveda> list();
 
+    @Transactional
     void save(CajaBoveda cajaBoveda);
 
     List<CajaBoveda> listByUni(String cod);

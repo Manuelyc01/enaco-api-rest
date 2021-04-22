@@ -1,12 +1,13 @@
 package apirest.service;
 
 import apirest.models.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.util.List;
 
 public interface InventarioService {
-
+    @Transactional
     void save(Inventario inventario);
 
     List<Inventario> list();

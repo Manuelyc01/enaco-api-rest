@@ -1,6 +1,7 @@
 package apirest.service;
 
 import apirest.models.UnidadOperativa;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public interface UnidadOpeService {
 
     void save(UnidadOperativa unidadOperativa);
 
+    @Transactional
     void saveCajaBoveda(String cod, double monto, Integer tipo);
 
     //FILTRADO POR LOCALIDAD

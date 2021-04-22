@@ -1,6 +1,7 @@
 package apirest.service;
 
 import apirest.models.Usuario;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,5 +18,6 @@ public interface UsuarioService {
 
     void update(Integer id, Usuario usuario);
 
+    @Transactional
     void compra(Integer id);
 }

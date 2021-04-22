@@ -55,7 +55,6 @@ public class CajaBovedaServiceImpl implements CajaBovedaService{
                 cajaBoveda.setSaldoFinal(stockFinal.get(0).getSaldoFinal()-monto);
                 break;
         }
-
         unidadOpeService.saveCajaBoveda(uo.getCod_uniOpe(),monto,id_tipo);
         cajaBovedaRepository.save(cajaBoveda);
     }
