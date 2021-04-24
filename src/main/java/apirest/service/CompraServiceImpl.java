@@ -37,46 +37,15 @@ public class CompraServiceImpl implements CompraService{
     @Override
     @Transactional
     public void save(Compra compra){
-        //REGISTRO CAJA BOVEDA
-        CajaBoveda cajaBoveda=new CajaBoveda();
-        cajaBoveda.setId_usuario(compra.getId_usuario());
-        cajaBoveda.setCod_uniOpe(compra.getCod_uniOpe());
-        TipoTransaccion tipoT = tipoTransacService.getById(3);
-        cajaBoveda.setId_tipoTransac(tipoT);
-        cajaBoveda.setFecha(compra.getFecha());
-        cajaBoveda.setMonto(compra.getTotalCompra());
-        //EX
-        UnidadOperativa uo = unidadOpeService.findByCod(cajaBoveda.getCod_uniOpe().getCod_uniOpe());//UNIDAD
-        Integer id_tipo = cajaBoveda.getId_tipoTransac().getId_tipoTransac();//Tipo transac
-        Double monto = cajaBoveda.getMonto();
-        if(id_tipo==2 ||id_tipo==3 && uo.getCajaBoveda()<monto){
+
+        UnidadOperativa uo = unidadOpeService.findByCod(compra.getCod_uniOpe().getCod_uniOpe());//UNIDAD
+        if(uo.getCajaBoveda()<compra.getTotalCompra()){
             throw new RuntimeException("Sin saldo caja boveda");
         }
-        //REGISTRO INVENTARIO
-        Inventario inventario=new Inventario();
-        inventario.setId_usuario(compra.getId_usuario());
-        inventario.setCod_almacen(compra.getCod_uniOpe());
-        Movimiento mv = movimientoService.findById(1);
-        inventario.setId_movimiento(mv);
-        inventario.setDocumento(compra.getNum_liquidacion());
-        inventario.setCod_tipoHoja(compra.getCod_tipoHoja());
-        inventario.setPesoNeto(compra.getPesoNeto());
-        //STOCK INICIAL--STOCK FINAL
-        List<Inventario> inventarios = inventarioService.listByProductAlmacen(compra.getCod_tipoHoja().getCod_tipoHoja(), compra.getCod_uniOpe().getCod_uniOpe());
-        if (inventarios.size()==0){
-            inventario.setStockInicial(0.00);
-            inventario.setStockFinal(+compra.getPesoNeto());
-        }else {
-            List<Inventario> inv1 = inventarioService.listByProductAlmacenOne(compra.getCod_tipoHoja().getCod_tipoHoja(), compra.getCod_uniOpe().getCod_uniOpe());
-            Inventario inventario1 = inv1.get(0);
-            inventario.setStockInicial(inventario1.getStockFinal());
-            inventario.setStockFinal(inventario1.getStockFinal()+compra.getPesoNeto());
-        }
-        cajaBovedaService.save(cajaBoveda);
-        unidadOpeService.saveCajaBoveda(uo.getCod_uniOpe(),monto,id_tipo);
-        usuarioService.compra(compra.getId_usuario().getId_usuario());
-        inventarioService.save(inventario);
-        compraRepository.save(compra);
+        compraRepository.saveCompra(compra.getNum_liquidacion(),compra.getCedula_productor().getCedula(),compra.getDni_repre(),
+                compra.getCod_uniOpe().getCod_uniOpe(),compra.getCod_tipoHoja().getCod_tipoHoja(),compra.getPesoBruto(),compra.getTara(),
+                compra.getHumedad(),compra.getPesoNeto(),compra.getValorCompra(),compra.getIgv(),compra.getTotalCompra(),
+                compra.getSon(),compra.getId_usuario().getId_usuario(),compra.getId_repre().getId_representante());
     }
     @Override
     public List<Compra> list(){

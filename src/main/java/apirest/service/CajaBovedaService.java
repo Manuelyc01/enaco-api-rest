@@ -12,6 +12,8 @@ public interface CajaBovedaService {
     @Transactional
     void save(CajaBoveda cajaBoveda);
 
+    Double getSaldoFinal(String cod_uni);
+
     List<CajaBoveda> listByUni(String cod);
 
     List<CajaBoveda> listByUniT(String cod, Integer t);

@@ -58,6 +58,11 @@ public class CajaBovedaServiceImpl implements CajaBovedaService{
         unidadOpeService.saveCajaBoveda(uo.getCod_uniOpe(),monto,id_tipo);
         cajaBovedaRepository.save(cajaBoveda);
     }
+    @Override
+    public Double getSaldoFinal(String cod_uni){
+        List<CajaBoveda> saldoFinal = cajaBovedaRepository.getStockFinal(cod_uni, PageRequest.of(0, 1));
+        return saldoFinal.get(0).getSaldoFinal();
+    }
 
     @Override
     public List<CajaBoveda> listByUni(String cod){
