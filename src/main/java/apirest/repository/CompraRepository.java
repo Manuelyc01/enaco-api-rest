@@ -45,7 +45,7 @@ public interface CompraRepository extends JpaRepository<Compra, Integer> {
             ":totalCompraIn," +
             ":sonIn," +
             ":id_usuarioIn," +
-            ":id_repreIn,)}",nativeQuery = true)
+            ":id_repreIn)}",nativeQuery = true)
     void saveCompra(
             @Param("num_liquidacionIn")String num_liquidacion,
             @Param("cedula_productorIn")String cedula_productor,
