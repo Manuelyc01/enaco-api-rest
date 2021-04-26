@@ -36,7 +36,7 @@ public class CajaBovedaServiceImpl implements CajaBovedaService{
         UnidadOperativa uo = unidadOpeService.findByCod(cajaBoveda.getCod_uniOpe().getCod_uniOpe());//UNIDAD
         Integer id_tipo = cajaBoveda.getId_tipoTransac().getId_tipoTransac();//Tipo transac
         Double monto = cajaBoveda.getMonto();
-        if(id_tipo==2 ||id_tipo==3 && uo.getCajaBoveda()<monto){
+        if(id_tipo==2 && uo.getCajaBoveda()<monto){
                 throw new RuntimeException("Sin saldo caja boveda");
         }
         cajaBovedaRepository.saveCajaBoveda(cajaBoveda.getId_usuario().getId_usuario(),cajaBoveda.getCod_uniOpe().getCod_uniOpe(),cajaBoveda.getId_tipoTransac().getId_tipoTransac(),
