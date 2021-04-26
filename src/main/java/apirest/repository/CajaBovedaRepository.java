@@ -36,7 +36,7 @@ public interface CajaBovedaRepository extends JpaRepository<CajaBoveda, Integer>
             ":cod_uniOpeIn," +
             ":id_tipoIn," +
             ":montoIn)}",nativeQuery = true)
-    void saveCajaBoveda(
+    String saveCajaBoveda(
             @Param("id_usuarioIn")Integer id_usuario,
             @Param("cod_uniOpeIn")String cod_uniOpe,
             @Param("id_tipoIn")Integer id_tipo,

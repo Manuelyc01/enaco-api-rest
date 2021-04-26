@@ -23,8 +23,8 @@ public class RestCajaBoveda {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/registro")
-    public void save(@RequestBody CajaBoveda cajaBoveda){
-        cajaBovedaService.save(cajaBoveda);
+    public String save(@RequestBody CajaBoveda cajaBoveda){
+         return cajaBovedaService.save(cajaBoveda);
     }
     @GetMapping("/listByUni/{cod}")
     public List<CajaBoveda> listByUni(@PathVariable String cod){

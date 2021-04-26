@@ -31,14 +31,14 @@ public class CajaBovedaServiceImpl implements CajaBovedaService{
 
     @Override
     @Transactional
-    public void save(CajaBoveda cajaBoveda){
+    public String save(CajaBoveda cajaBoveda){
 
         UnidadOperativa uo = unidadOpeService.findByCod(cajaBoveda.getCod_uniOpe().getCod_uniOpe());//UNIDAD
         Integer id_tipo = cajaBoveda.getId_tipoTransac().getId_tipoTransac();//Tipo transac
         if(id_tipo==2 && uo.getCajaBoveda()<cajaBoveda.getMonto()){
                 throw new RuntimeException("Sin saldo caja boveda");
         }
-        cajaBovedaRepository.saveCajaBoveda(cajaBoveda.getId_usuario().getId_usuario(),cajaBoveda.getCod_uniOpe().getCod_uniOpe(),
+        return cajaBovedaRepository.saveCajaBoveda(cajaBoveda.getId_usuario().getId_usuario(),cajaBoveda.getCod_uniOpe().getCod_uniOpe(),
                 cajaBoveda.getId_tipoTransac().getId_tipoTransac(),cajaBoveda.getMonto());
     }
     @Override

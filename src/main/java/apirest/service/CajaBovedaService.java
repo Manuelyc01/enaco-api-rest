@@ -10,7 +10,7 @@ public interface CajaBovedaService {
     List<CajaBoveda> list();
 
     @Transactional
-    void save(CajaBoveda cajaBoveda);
+    String save(CajaBoveda cajaBoveda);
 
     Double getSaldoFinal(String cod_uni);
 
