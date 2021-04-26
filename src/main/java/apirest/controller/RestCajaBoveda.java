@@ -21,6 +21,7 @@ public class RestCajaBoveda {
     public List<CajaBoveda> listar(){
         return cajaBovedaService.list();
     }
+
     @RequestMapping(method = RequestMethod.POST, value = "/registro")
     public void save(@RequestBody CajaBoveda cajaBoveda){
         cajaBovedaService.save(cajaBoveda);
