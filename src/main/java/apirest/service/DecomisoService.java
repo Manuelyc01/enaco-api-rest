@@ -7,7 +7,8 @@ import java.text.ParseException;
 import java.util.List;
 
 public interface DecomisoService {
-    List<Decomiso> numMoviento();
+
+    List<Decomiso> numMovimiento();
 
     List<Decomiso> listar();
 

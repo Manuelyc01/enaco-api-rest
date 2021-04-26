@@ -24,7 +24,7 @@ public class RestDecomiso {
 
     @GetMapping("/numMoviento")
     public Integer numMoviento(){
-        List<Decomiso> d = decomisoService.numMoviento();
+        List<Decomiso> d = decomisoService.numMovimiento();
         return d.get(0).getId_decomiso();
     }
     @GetMapping("/listar")
