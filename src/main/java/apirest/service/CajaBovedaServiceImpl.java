@@ -39,24 +39,8 @@ public class CajaBovedaServiceImpl implements CajaBovedaService{
         if(id_tipo==2 ||id_tipo==3 && uo.getCajaBoveda()<monto){
                 throw new RuntimeException("Sin saldo caja boveda");
         }
-        //DIA
-        cajaBoveda.setFecha(new Date());
-
-
-        List<CajaBoveda> stockFinal = cajaBovedaRepository.getStockFinal(cajaBoveda.getCod_uniOpe().getCod_uniOpe(), PageRequest.of(0, 1));
-        switch (id_tipo){
-            case 1://INGRESO
-                cajaBoveda.setSaldoInicial(stockFinal.get(0).getSaldoFinal());
-                cajaBoveda.setSaldoFinal(monto+stockFinal.get(0).getSaldoFinal());
-                break;
-            case 2://REEMBOLSO
-            case 3://COMPRA
-                cajaBoveda.setSaldoInicial(stockFinal.get(0).getSaldoFinal());
-                cajaBoveda.setSaldoFinal(stockFinal.get(0).getSaldoFinal()-monto);
-                break;
-        }
-        unidadOpeService.saveCajaBoveda(uo.getCod_uniOpe(),monto,id_tipo);
-        cajaBovedaRepository.save(cajaBoveda);
+        cajaBovedaRepository.saveCajaBoveda(cajaBoveda.getId_usuario().getId_usuario(),cajaBoveda.getCod_uniOpe().getCod_uniOpe(),cajaBoveda.getId_tipoTransac().getId_tipoTransac(),
+                cajaBoveda.getMonto());
     }
     @Override
     public Double getSaldoFinal(String cod_uni){
