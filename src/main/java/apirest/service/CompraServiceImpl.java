@@ -36,13 +36,13 @@ public class CompraServiceImpl implements CompraService{
 
     @Override
     @Transactional
-    public void save(Compra compra){
+    public String save(Compra compra){
 
         UnidadOperativa uo = unidadOpeService.findByCod(compra.getCod_uniOpe().getCod_uniOpe());//UNIDAD
         if(uo.getCajaBoveda()<compra.getTotalCompra()){
             throw new RuntimeException("Sin saldo caja boveda");
         }
-        compraRepository.saveCompra(compra.getNum_liquidacion(),compra.getCedula_productor().getCedula(),compra.getDni_repre(),
+        return compraRepository.saveCompra(compra.getNum_liquidacion(),compra.getCedula_productor().getCedula(),compra.getDni_repre(),
                 compra.getCod_uniOpe().getCod_uniOpe(),compra.getCod_tipoHoja().getCod_tipoHoja(),compra.getPesoBruto(),compra.getTara(),
                 compra.getHumedad(),compra.getPesoNeto(),compra.getValorCompra(),compra.getIgv(),compra.getTotalCompra(),
                 compra.getSon(),compra.getId_usuario().getId_usuario(),compra.getId_repre().getId_representante());

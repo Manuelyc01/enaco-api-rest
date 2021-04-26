@@ -18,8 +18,8 @@ public class RestCompra {
         this.compraService = compraService;
     }
     @RequestMapping(method = RequestMethod.POST, value = "/registro")
-    public void save(@RequestBody Compra compra){
-        compraService.save(compra);
+    public String save(@RequestBody Compra compra){
+        return compraService.save(compra);
     }
     @GetMapping("/findById/{id}")
     public Compra findById(@PathVariable Integer id){

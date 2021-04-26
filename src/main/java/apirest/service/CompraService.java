@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CompraService {
     @Transactional
-    void save(Compra compra);
+    String save(Compra compra);
 
     List<Compra> list();
 
