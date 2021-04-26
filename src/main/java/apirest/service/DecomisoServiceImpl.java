@@ -36,7 +36,7 @@ public class DecomisoServiceImpl implements DecomisoService {
     }
     @Override
     public List<Decomiso> listar(){
-        return repository.findAll();
+        return repository.listar();
     }
 
     @Override

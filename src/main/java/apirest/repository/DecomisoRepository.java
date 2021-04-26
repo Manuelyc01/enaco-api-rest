@@ -1,5 +1,6 @@
 package apirest.repository;
 
+import apirest.models.Compra;
 import apirest.models.Decomiso;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,9 @@ public interface DecomisoRepository extends JpaRepository<Decomiso, Integer> {
 
     @Query("SELECT u FROM Decomiso u order by u.id_decomiso desc")
     public List<Decomiso> list(Pageable pageable);
+
+    @Query("SELECT u from Decomiso u order by u.id_decomiso desc ")
+    public List<Decomiso> listar();
 
     @Query("SELECT u from Decomiso u where u.cod_uniOpe.cod_uniOpe=?1 order by u.fecha desc")
     List<Decomiso> lisByUni(String cod);
