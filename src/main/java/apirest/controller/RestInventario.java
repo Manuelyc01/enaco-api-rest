@@ -18,11 +18,6 @@ public class RestInventario {
         this.inventarioService = inventarioService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/registro")
-    public void save(@RequestBody Inventario inventario){
-        inventarioService.save(inventario);
-    }
-
     @GetMapping("/listar")
     public List<Inventario> listar(){
         return inventarioService.list();

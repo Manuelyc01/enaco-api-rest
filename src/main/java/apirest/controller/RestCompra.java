@@ -17,26 +17,32 @@ public class RestCompra {
     public RestCompra(CompraService compraService) {
         this.compraService = compraService;
     }
+
     @RequestMapping(method = RequestMethod.POST, value = "/registro")
     public String save(@RequestBody Compra compra){
         return compraService.save(compra);
     }
+
     @GetMapping("/findById/{id}")
     public Compra findById(@PathVariable Integer id){
         return compraService.findById(id);
     }
+
     @GetMapping("/listar")
     public List<Compra> listar(){
         return compraService.list();
     }
+
     @GetMapping("/listByIdUsuario/{id}")
     public List<Compra> listByIdUsuario(@PathVariable Integer id){
         return compraService.listByIdUsuario(id);
     }
+
     @GetMapping("/listByUni/{cod}")
     public List<Compra> listByUni(@PathVariable String cod){
         return compraService.listByUni(cod);
     }
+
     @GetMapping("/registrosFechaCompra/{inicio}/{fin}/{cod}")
     public List<Compra> registrosFechaCompra(@PathVariable String inicio, @PathVariable String fin, @PathVariable String cod) throws ParseException {
         return compraService.registrosFechaCompra(inicio, fin, cod);

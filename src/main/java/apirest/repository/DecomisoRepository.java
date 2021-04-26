@@ -4,6 +4,7 @@ import apirest.models.Decomiso;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -26,4 +27,27 @@ public interface DecomisoRepository extends JpaRepository<Decomiso, Integer> {
 
     @Query("select u from Decomiso  u where u.fecha between ?1 and ?2 and u.cod_uniOpe.cod_uniOpe=?3 and u.cod_tipoHoja.cod_tipoHoja=?4 order by u.fecha desc ")
     List<Decomiso> filterFechaDecomisoHc(Date ini, Date fn, String cod, String codHc);
+
+    @Query(value = "{call sp_registrarDecomiso(" +
+            ":id_usuarioIn," +
+            ":cod_uniOpeIn," +
+            ":lugarOperativoIn," +
+            ":lugarDecomisoIn," +
+            ":decomisanteIn," +
+            ":docReferenciaIn," +
+            ":comentarioIn," +
+            ":cod_tipoHojaIn," +
+            ":cantidadIn," +
+            ":cantidadNetaIn)}",nativeQuery = true)
+    String saveDecomiso(
+            @Param("id_usuarioIn")Integer id_usuario,
+            @Param("cod_uniOpeIn")String cod_uniOpe,
+            @Param("lugarOperativoIn")String lugarOperativo,
+            @Param("lugarDecomisoIn")String lugarDecomiso,
+            @Param("decomisanteIn")String decomisante,
+            @Param("docReferenciaIn")String docReferencia,
+            @Param("comentarioIn")String comentario,
+            @Param("cod_tipoHojaIn")String cod_tipoHoja,
+            @Param("cantidadIn")Double cantidad,
+            @Param("cantidadNetaIn")Double cantidadNeta);
 }

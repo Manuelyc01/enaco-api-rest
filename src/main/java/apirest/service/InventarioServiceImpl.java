@@ -24,12 +24,6 @@ public class InventarioServiceImpl implements InventarioService{
         this.unidadOpeService = unidadOpeService;
     }
     @Override
-    @Transactional
-    public void save(Inventario inventario){
-        inventarioRepository.save(inventario);
-    }
-
-    @Override
     public List<Inventario> list(){
         return inventarioRepository.list();
     }

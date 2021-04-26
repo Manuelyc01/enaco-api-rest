@@ -1,5 +1,6 @@
 package apirest.service;
 
+import apirest.models.Estado;
 import apirest.models.Usuario;
 import apirest.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
     @Override
     public void eliminar(Integer id_usuario){
-        repository.deleteById(id_usuario);
+        Usuario usuario = repository.getOne(id_usuario);
+        Estado e=new Estado();
+        e.setId_estado(2);
+        usuario.setId_estado(e);
+        repository.save(usuario);
     }
     @Override
     public Usuario findById(Integer id){

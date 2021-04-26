@@ -7,9 +7,6 @@ import java.text.ParseException;
 import java.util.List;
 
 public interface InventarioService {
-    @Transactional
-    void save(Inventario inventario);
-
     List<Inventario> list();
 
     List<Inventario> listByProductAlmacen(String cod_tipoHoja, String cod_uniOpe);
