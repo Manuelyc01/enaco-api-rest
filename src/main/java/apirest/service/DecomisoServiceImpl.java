@@ -34,6 +34,10 @@ public class DecomisoServiceImpl implements DecomisoService {
     public List<Decomiso> numMoviento(){
         return repository.list(PageRequest.of(0,1));
     }
+    @Override
+    public List<Decomiso> listar(){
+        return repository.findAll();
+    }
 
     @Override
     @Transactional

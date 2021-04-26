@@ -27,6 +27,10 @@ public class RestDecomiso {
         List<Decomiso> d = decomisoService.numMoviento();
         return d.get(0).getId_decomiso();
     }
+    @GetMapping("/listar")
+    public List<Decomiso> listar(){
+        return decomisoService.listar();
+    }
 
     @GetMapping("/listByUni/{cod}")
     public List<Decomiso> listByUni(@PathVariable String cod){

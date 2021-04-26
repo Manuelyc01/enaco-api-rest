@@ -9,6 +9,8 @@ import java.util.List;
 public interface DecomisoService {
     List<Decomiso> numMoviento();
 
+    List<Decomiso> listar();
+
     @Transactional
     String save(Decomiso decomiso);
 
